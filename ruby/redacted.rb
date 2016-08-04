@@ -1,0 +1,1 @@
+# A Ruby program that will ask a user for a string (a sentence), ask the user if any words in the sentence should be redacted, and then return the original string with the redacted words removed.
