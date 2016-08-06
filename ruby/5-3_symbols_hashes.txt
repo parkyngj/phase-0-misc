@@ -1,0 +1,141 @@
+*************************************************
+RELEASE 0: RESEARCH SYMBOLS ON YOUR OWN
+*************************************************
+----------------------------------------------------------------------------------------
+1. What can you find out about symbols and strings in Ruby?
+----------------------------------------------------------------------------------------
+
+From http://stackoverflow.com/questions/255078/whats-the-difference-between-a-string-and-a-symbol-in-ruby, a bullet list
+
+-Multiple symbols representing a single value are iedntical, whereas this is not true with strings
+  -> This means that using symbols can save memory (since String will be a different object w/ unique object ID everytime)
+  -> Faster to compare symbols for equality, since they will only get their IDs checked
+-String class has a lot more methods for string manipulation
+-Symbols are immutable - their value remain constant
+
+From http://www.gaurishsharma.com/2013/04/understanding-differences-between-symbols-strings-in-ruby.html
+
+-Use strings when
+  -> You want use any string methods like .upcase, etc.
+  -> You want to change/morph the string
+
+-Use symbols when
+  -> If you need something that must remain absolutely constant
+  -> Places where the same string is going to be repeatedly used (example: hash keys are good candidates for symbols.)
+      So, instead of using hash["key"] = value, use symbols like this: hash[:key] = value
+
+
+
+*************************************************
+RELEASE 2: EXPLORE HASH METHODS
+*************************************************
+----------------------------------------------------------------------------------------
+1. How do you delete a key-value pair?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+  }
+
+You can delete a key-value pair by running
+
+h.delete(:a)
+
+Apparently, if you store a key as a string, like so:
+
+  h = {
+  "a" => 1
+  "b'" => 2
+  }
+
+Then you must type
+
+h.delete("a")
+
+Related: If storing keys as symbols, then don't have to type =>; just type key: value, instead of key => value.
+
+----------------------------------------------------------------------------------------
+2. What happens if you try to access a value of a key that is not in the hash?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+  }
+
+Then h[:c] will return nil.
+
+Let k = {
+  "a" => 1
+  "b" => 2
+}
+
+Then k["c"] will return nil.
+
+----------------------------------------------------------------------------------------
+3. Regarding the answer you got for the previous question, is there a way to set a different default return value when a key is not present in the hash?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+  }
+
+Type h.default = 0
+
+Then h[:c] won't return nil, but it will return 0.
+
+----------------------------------------------------------------------------------------
+4. How can you access just the keys of a hash? What data type does this method return?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+}
+
+Then you can access just the keys of a hash by typing
+
+h.each_key {|key| puts key}
+
+The data type that this method returns is a string.
+
+(Alternatively, for transparency, could use "do"
+h.each_key do |key|
+  puts key
+end
+)
+
+----------------------------------------------------------------------------------------
+5. How do you remove everything from the hash at once (returning an empty hash)?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+}
+
+Then you can remove everything from the hash at once by calling .clear on the hash like so:
+
+h.clear
+
+----------------------------------------------------------------------------------------
+6. How can you access just the values of a hash?
+----------------------------------------------------------------------------------------
+
+Let h = {
+  a: 1,
+  b: 2
+}
+
+Then you can access just the values of a hash by typing
+
+h.each_value {|value| puts value}
+
+The data type that this method returns is a string.
+
+(Alternatively, for transparency, could use "do"
+h.each_value do |value|
+  puts value
+end)
